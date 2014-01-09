@@ -10,12 +10,13 @@ Purpose: System Tests
 NB: More tests need to be written, this is just the start.
 '''
 
-import unittest, os, sys, base64, itertools, random, time
-from OrderedSet import OrderedSet as oset
-import pyflwor
-import symbols
+import unittest
+from pyflwor.OrderedSet import OrderedSet as oset
+from pyflwor import pyflwor, symbols
 
 exe = pyflwor.execute
+
+
 class TestPyQuery(unittest.TestCase):
 
     def test_hello(self):

@@ -6,3 +6,8 @@ parsetab.py
 .swork.*
 env
 
+.idea/
+build
+dist
+*.egg
+*.egg-info/

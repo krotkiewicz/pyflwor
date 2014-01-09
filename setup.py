@@ -1,7 +1,7 @@
-from distutils.core import setup
+from setuptools import setup, find_packages
 
 setup(name='pyflwor',
-      version='git master',
+      version='1.0',
       description=(
         'A object query system for arbitrary python objects..'
       ),
@@ -9,6 +9,18 @@ setup(name='pyflwor',
       author_email='tim.tadh@gmail.com',
       url='https://www.github.com/timtadh/pyflwor',
       license='BSD',
-      packages=['pyflwor'],
+      packages=find_packages(),
+      install_requires=[
+        'ply',
+      ],
+      tests_require=[
+        'nose'
+      ],
+      test_suite='pyflwor.tests',
+      extras_require = {
+        'repl':  ['getline']
+      },
+      dependency_links = [
+        'https://github.com/timtadh/getline/tarball/master#egg=getline',
+    ]
 )
-

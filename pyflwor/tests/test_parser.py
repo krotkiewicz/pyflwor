@@ -11,8 +11,8 @@ NB: Should test most of the language, as in make sure examples compile. Tests
     for correctness will be quite difficult given the nature of this compiler.
 '''
 
-import unittest, os, sys, base64, itertools, random, time
-import pyflwor
+import unittest
+from pyflwor import pyflwor
 
 
 class TestParser(unittest.TestCase):

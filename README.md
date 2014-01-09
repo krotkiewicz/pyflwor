@@ -32,37 +32,21 @@ are currently returned as a set.
 
 ### Installation
 
-To install `pyflwor` using pip first install the dependencies:
+To install `pyflwor:
 
-    pip install ply nose
+    python setup.py install
 
-nose is only required if you want to run the tests. You can also optionally
-install `getline` if you want to use the included repl library:
+To run tests:
+
+    python setup.py test
+
+You can optionally install `getline` if you want to use the included repl library:
 
     pip install -e git+https://github.com/timtadh/getline.git#egg=getline
 
-finally you can directly install `pyflwor` using pip with:
+Also, you can directly install `pyflwor` using pip with:
 
     pip install -e git+https://github.com/timtadh/pyflwor.git#egg=pyflwor
-
-or via clonin the repository and using the setup file:
-
-    git clone https://github.com/timtadh/pyflwor.git
-    cd pyflwor
-    python setup.py install
-
-to run the tests:
-
-    cd pyflwor
-    nosetests
-
-Alternately, one may wish to automate the dependency install via the reqs.txt
-file. In this case you should install as follows:
-    
-    git clone https://github.com/timtadh/pyflwor.git
-    cd pyflwor
-    IFS=$'\n' ; for req in `cat reqs.txt` ; do echo $req ; pip install $req ; done
-    python setup.py install
 
 
 Motivation
