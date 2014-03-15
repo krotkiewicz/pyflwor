@@ -13,6 +13,8 @@ from ply import yacc
 from lexer import tokens, Lexer
 import symbols
 
+from .exc import PyflworSyntaxError
+
 ## The parser does not build an abstract syntax tree nor does it build
 ## intermediate code, instead it composes functions and objects together. These
 ## functions are defined in symbols.py file. The composed function returned
@@ -23,6 +25,7 @@ import symbols
 ## If you are confused about the syntax in this file I recommend reading the
 ## documentation on the PLY website to see how this compiler compiler's syntax
 ## works.
+
 class Parser(object):
 
     def __new__(cls, **kwargs):
@@ -591,7 +594,8 @@ class Parser(object):
         t[0] = symbols.setexprValue2(t[2], symbols.setexprOperator2('is not'), t[7])
 
     def p_error(self, t):
-        raise SyntaxError, "Syntax error at '%s', %s.%s" % (t,t.lineno,t.lexpos)
+        msg = "Syntax error at '%s', %s.%s" % (t,t.lineno,t.lexpos)
+        raise PyflworSyntaxError(msg, t.lineno)
 
 
 if __name__ == '__main__':
