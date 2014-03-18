@@ -14,6 +14,8 @@ from collections import deque
 from itertools import product
 from OrderedSet import OrderedSet
 
+from .exc import PyFlworException
+
 class Attribute(object):
     '''
     Represents an attribute. An attribute consists of a name and a
@@ -111,7 +113,8 @@ def attributeValue(attribute_list, scalar=False, context='locals'):
             if hasattr(obj, attr.name):
                 obj = expand(objs, obj, attr, getattr(obj, attr.name))
             else:
-                raise Exception, "object %s did not have attr %s" % (str(obj), attr.name)
+                msg = "object %s has no attribute %s" % (str(obj), attr.name)
+                raise PyFlworException, msg
         return obj
 
     return value
@@ -126,7 +129,7 @@ def operator(op):
     if op == '>=': return lambda x,y: x >= y
     if op == '<': return lambda x,y: x < y
     if op == '>': return lambda x,y: x > y
-    raise Exception, "operator %s not found" % op
+    raise PyFlworException, "operator %s not found" % op
 
 def arith_operator(op):
     '''
@@ -136,7 +139,7 @@ def arith_operator(op):
     if op == '-': return lambda x,y: x - y
     if op == '*': return lambda x,y: x * y
     if op == '/': return lambda x,y: x / y
-    raise Exception, "operator %s not found" % op
+    raise PyFlworException, "operator %s not found" % op
 
 def setoperator(op):
     '''
@@ -145,7 +148,7 @@ def setoperator(op):
     if op == '|': return lambda x,y: x | y
     if op == '&': return lambda x,y: x & y
     if op == '-': return lambda x,y: x - y
-    raise Exception, "operator %s not found" % op
+    raise PyFlworException, "operator %s not found" % op
 
 def setexprOperator1(op):
     '''
@@ -153,7 +156,7 @@ def setexprOperator1(op):
     '''
     if op == 'in': return lambda x,y: x in y
     if op == 'not in': return lambda x,y: x not in y
-    raise Exception, "operator %s not found" % op
+    raise PyFlworException, "operator %s not found" % op
 
 def setexprOperator2(op):
     '''
@@ -165,7 +168,7 @@ def setexprOperator2(op):
     if op == 'superset': return lambda x,y: x >= y
     if op == 'proper subset': return lambda x,y: x < y
     if op == 'proper superset': return lambda x,y: x > y
-    raise Exception, "operator %s not found" % op
+    raise PyFlworException, "operator %s not found" % op
 
 def booleanOperator(op):
     '''
@@ -173,14 +176,14 @@ def booleanOperator(op):
     '''
     if op == 'and': return lambda x,y,objs: x(objs) and y(objs)
     if op == 'or':  return lambda x,y,objs: x(objs) or y(objs)
-    raise Exception, "operator %s not found" % op
+    raise PyFlworException, "operator %s not found" % op
 
 def unaryOperator(op):
     '''
     Returns a function which performs unary (not) operation
     '''
     if op == 'not': return lambda x: not x
-    raise Exception, "operator %s not found" % op
+    raise PyFlworException, "operator %s not found" % op
 
 def comparisonValue(value1, op, value2):
     '''
@@ -368,7 +371,7 @@ def quantifiedValue(mode, name, s, satisfies):
                 if satisfies(cobjs):
                     return True
             return False
-        raise Exception, "mode '%s' is not 'every' or 'some'" % mode
+        raise PyFlworException, "mode '%s' is not 'every' or 'some'" % mode
     return where
 
 def flwrSequence(return_expr, for_expr=None, let_expr=None, where_expr=None, order_expr=None, flatten=False, collecting=False):

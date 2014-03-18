@@ -631,7 +631,7 @@ if __name__ == '__main__':
         a.b = 'b attr'
         print tuple(query({'a':a, 'gx':'gx attr', 'sum':sum, 'tuple':tuple}))
         print "SUCCESS"
-    except Exception, e:
+    except PyFlworException, e:
         print e
         print "FAILURE"
         raise

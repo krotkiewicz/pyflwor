@@ -12,6 +12,8 @@ Purpose: The lexer front end for the Query Compiler.
 from ply import lex
 from ply.lex import Token
 
+from .exc import PyFlworException
+
 tokens = ('NUMBER', 'STRING', 'NAME', 'SOME', 'EVERY', 'IN', 'NOT', 'SATISFIES', 'AND', 'OR', 'IS',
             'SUBSET', 'SUPERSET', 'PROPER', 'FOR', 'LET', 'RETURN', 'WHERE',
             'FUNCTION', 'IF', 'THEN', 'ELSE', 'FLATTEN', 'COLLECT', 'AS', 'WITH',
@@ -144,7 +146,7 @@ class Lexer(object):
     t_ignore = " \t"
 
     def t_error(self, t):
-        raise Exception, "Illegal character '%s'" % t
+        raise PyFlworException, "Illegal character '%s'" % t
         t.lexer.skip(1)
 
 if __name__ == '__main__':
